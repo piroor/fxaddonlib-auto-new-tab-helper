@@ -25,7 +25,7 @@ if (typeof window == 'undefined' ||
 }
  
 (function() { 
-	const currentRevision = 5;
+	const currentRevision = 6;
 
 	if (!('piro.sakura.ne.jp' in window)) window['piro.sakura.ne.jp'] = {};
 
@@ -70,6 +70,14 @@ window['piro.sakura.ne.jp'].autoNewTabHelper = {
 		return this.__EffectiveTLD;
 	},
 //	__EffectiveTLD : null,
+
+	get _URIFixup()
+	{
+		if (!('__URIFixup' in this)) {
+			this.__URIFixup = Cc['@mozilla.org/docshell/urifixup;1'].getService(Ci.nsIURIFixup);
+		}
+		return this.__URIFixup;
+	},
  
 /* utilities */ 
 	
@@ -219,6 +227,13 @@ window['piro.sakura.ne.jp'].autoNewTabHelper = {
 */
 
 		var info = aInfo || { uri : '' };
+		try{
+			info.uri = this._URIFixup.createFixupURI(info.uri, Ci.nsIURIFixup.FIXUP_FLAG_USE_UTF8);
+			info.uri = info.uri.spec || '';
+		}
+		catch(e) {
+		}
+
 		if (/^(javascript|moz-action|mailto):/.test(info.uri))
 			return false;
 
