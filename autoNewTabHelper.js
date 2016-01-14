@@ -1,47 +1,20 @@
-/* 
- Helper Library for Automatic New Tab Features
-
- license: The MIT License, Copyright (c) 2009-2014 YUKI "Piro" Hiroshi
-   http://github.com/piroor/fxaddonlib-auto-new-tab-helper/blob/master/license.txt
- original:
-   http://github.com/piroor/fxaddonlib-auto-new-tab-helper
-*/
+/**
+ * @fileOverview Helper Library for Automatic New Tab Features
+ * @author       YUKI "Piro" Hiroshi
+ * @version      11
+ *
+ * @license
+ *   The MIT License, Copyright (c) 2009-2015 YUKI "Piro" Hiroshi.
+ *   http://github.com/piroor/fxaddonlib-auto-new-tab-helper/blob/master/license.txt
+ * @url http://github.com/piroor/fxaddonlib-auto-new-tab-helper
+ */
  
-/* To work as a JS Code Module  */ 
-if (typeof window == 'undefined' ||
-	(window && typeof window.constructor == 'function')) {
-	this.EXPORTED_SYMBOLS = ['autoNewTabHelper'];
-
-	// If namespace.jsm is available, export symbols to the shared namespace.
-	// See: http://github.com/piroor/fxaddonlib-namespace
-	try {
-		let ns = {};
-		Components.utils.import('resource://my-modules/namespace.jsm', ns);
-		/* var */ window = ns.getNamespaceFor('piro.sakura.ne.jp');
-	}
-	catch(e) {
-		window = {};
-	}
-}
+var EXPORTED_SYMBOLS = ['autoNewTabHelper'];
  
-(function() { 
-	const currentRevision = 10;
-
-	if (!('piro.sakura.ne.jp' in window)) window['piro.sakura.ne.jp'] = {};
-
-	var loadedRevision = 'autoNewTabHelper' in window['piro.sakura.ne.jp'] ?
-			window['piro.sakura.ne.jp'].autoNewTabHelper.revision :
-			0 ;
-	if (loadedRevision && loadedRevision > currentRevision) {
-		return;
-	}
-
-	const Cc = Components.classes;
-	const Ci = Components.interfaces;
+const Cc = Components.classes;
+const Ci = Components.interfaces;
 	
-window['piro.sakura.ne.jp'].autoNewTabHelper = { 
-	revision : currentRevision,
-
+var autoNewTabHelper = { 
 	kID : 'checknewtab-id',
 	kNEW_TAB_READY: 'data-moz-open-newtab-ready',
 	
@@ -428,11 +401,4 @@ window['piro.sakura.ne.jp'].autoNewTabHelper = {
 		return isGoogleRedirectLink;
 	}
    
-}; 
-   
-})(); 
-
-if (window != this) { // work as a JS Code Module
-	this.autoNewTabHelper = window['piro.sakura.ne.jp'].autoNewTabHelper;
-}
- 
+};
