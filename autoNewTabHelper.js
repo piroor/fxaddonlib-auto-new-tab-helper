@@ -16,7 +16,6 @@ const Ci = Components.interfaces;
 	
 var autoNewTabHelper = { 
 	kID : 'checknewtab-id',
-	kNEW_TAB_READY: 'data-moz-open-newtab-ready',
 	
 	get _IOService() { 
 		if (!this.__IOService) {
