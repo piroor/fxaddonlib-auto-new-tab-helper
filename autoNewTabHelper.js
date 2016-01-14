@@ -205,7 +205,7 @@ var autoNewTabHelper = {
 
 		// tab detection: unavailable on the content process
 		var sourceTab   = aParams.sourceTab;
-		var tabbrowser  = currentTab ? this.getTabBrowserFromChild(currentTab.linkedBrowser) : null ;
+		var tabbrowser  = sourceTab ? this.getTabBrowserFromChild(sourceTab.linkedBrowser) : null ;
 		var TST         = tabbrowser && 'treeStyleTab' in tabbrowser ? tabbrowser.treeStyleTab : null ;
 		var ownerTab    = TST ?
 							TST.getParentTab(sourceTab) :
