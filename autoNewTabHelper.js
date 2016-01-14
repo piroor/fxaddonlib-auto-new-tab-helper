@@ -4,7 +4,7 @@
  * @version      11
  *
  * @license
- *   The MIT License, Copyright (c) 2009-2015 YUKI "Piro" Hiroshi.
+ *   The MIT License, Copyright (c) 2009-2016 YUKI "Piro" Hiroshi.
  *   http://github.com/piroor/fxaddonlib-auto-new-tab-helper/blob/master/license.txt
  * @url http://github.com/piroor/fxaddonlib-auto-new-tab-helper
  */
