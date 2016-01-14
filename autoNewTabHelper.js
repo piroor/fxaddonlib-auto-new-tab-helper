@@ -226,10 +226,9 @@ var autoNewTabHelper = {
 			sourceHost == targetHost &&
 			!this._isRedirectorLink(aParams.uri, targetHost, sourceHost) &&
 			!isBlank &&
-			sourceURI.split('#')[0] != aParams.uri.split('#')[0] &&
-			tabbrowser
+			sourceURI.split('#')[0] != aParams.uri.split('#')[0]
 			) {
-			openTab = aParams.newTab && aParams.invert ? !openTab : true ;
+			shouldOpenNewTab = aParams.newTab && aParams.invert ? !shouldOpenNewTab : true ;
 			nextOwnerTab = ('forceChild' in internal && !internal.forceChild) ? null :
 					(ownerHost == targetHost && !internal.forceChild) ? ownerTab :
 					sourceTab ;
@@ -239,12 +238,14 @@ var autoNewTabHelper = {
 			let insertNewChildAtFirst = false;
 			if (TST) {
 				try {
-					insertNewChildAtFirst = this.getPref('extensions.treestyletab.insertNewChildAt') == 0;
+					insertNewChildAtFirst = Cc['@mozilla.org/preferences;1']
+											.getService(Ci.nsIPrefBranch)
+											.getIntPref('extensions.treestyletab.insertNewChildAt') == 0;
 				}
 				catch(e) {
 				}
 			}
-			let insertBefore = ownerHost == targetHost && !internal.forceChild &&
+			let insertBefore = tabbrowser && ownerHost == targetHost && !internal.forceChild &&
 					(insertNewChildAtFirst ?
 						nextTab :
 						(
