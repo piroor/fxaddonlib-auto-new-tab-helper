@@ -272,7 +272,10 @@ var autoNewTabHelper = {
 			shouldOpenNewTab : shouldOpenNewTab,
 			ownerTab         : nextOwnerTab,
 			lastRelatedTab   : lastRelated,
-			tabbrowser       : tabbrowser
+			tabbrowser       : tabbrowser,
+			// for debugging
+			sourceHost       : sourceHost,
+			targetHost       : targetHost
 		};
 	},
  
@@ -284,7 +287,7 @@ var autoNewTabHelper = {
 		if (str instanceof Ci.nsIURI) str = aURI.spec;
 
 		var userHomePart = aCheckUserHome ? str.match(/^\w+:\/\/[^\/]+(\/~[^\/]+)\//) : '' ;
-		if (userHomePart) userHomePart = userHomePart[1];
+		userHomePart = (userHomePart && userHomePart[1]) || '';
 
 		if (aUseEffectiveTLD && this._EffectiveTLD) {
 			try {
